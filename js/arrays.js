@@ -503,3 +503,168 @@ list.next.next.next = { value: 4 };
 Как лучше – с рекурсией или без?
 
 */
+
+
+/*
+### 10
+
+Отфильтровать анаграммы
+важность: 3
+Анаграммы – слова, состоящие из одинакового количества одинаковых букв, но в разном порядке. Например:
+
+воз - зов
+киборг - гробик
+корсет - костер - сектор
+Напишите функцию aclean(arr), которая возвращает массив слов, очищенный от анаграмм.
+
+Например:
+
+var arr = ["воз", "киборг", "корсет", "ЗОВ", "гробик", "костер", "сектор"];
+
+alert( aclean(arr) ); // "воз,киборг,корсет" или "ЗОВ,гробик,сектор"
+Из каждой группы анаграмм должно остаться только одно слово, не важно какое.
+
+*/
+
+function aclean(arr) {
+
+	let resultArray = [];
+	let obj = {};
+
+	console.log(arr);
+
+	for (let i = 0; i < arr.length; i++) {
+		let edditedWord = arr[i].toLowerCase().split('').sort().join('');
+		console.log(edditedWord);
+		obj[edditedWord] = arr[i];
+	}
+
+	for (let key in obj) {
+		resultArray.push(obj[key]);
+	}
+
+	console.log(resultArray);
+	return resultArray;
+	
+}
+
+// aclean(["воз", "киборг", "корсет", "ЗОВ", "гробик", "костер", "сектор"]);
+
+
+/*
+### 111
+
+Оставить уникальные элементы массива
+важность: 3
+Пусть arr – массив строк.
+
+Напишите функцию unique(arr), которая возвращает массив, содержащий только уникальные элементы arr.
+
+Например:
+
+function unique(arr) {
+  //Ваш код
+}
+
+var strings = ["кришна", "кришна", "харе", "харе",
+  "харе", "харе", "кришна", "кришна", "8-()"
+];
+
+alert( unique(strings) ); // кришна, харе, 8-()
+
+*/
+
+function unique(arr) {
+
+	let obj = {};
+	let filteredArr = [];
+
+	for (let i = 0; i < arr.length; i++) {
+
+		for (let j = i + 1; j < arr.length; j++) {
+			if (arr[i] === arr[j]) {
+
+			} else {
+				let optionName = arr[j];
+				obj[optionName] = arr[j];
+				
+			}
+		}
+	}
+
+	for (let key in obj) {
+		filteredArr.push(obj[key]);
+	}
+
+	console.log(filteredArr);
+
+	return filteredArr;
+}
+
+// unique(["кришна", "кришна", "харе", "харе", "харе", "харе", "кришна", "кришна", "8-()"]);
+
+
+		/* Массив: перебирающие методы */
+
+/*
+### 1
+Перепишите цикл через map
+важность: 5
+Код ниже получает из массива строк новый массив, содержащий их длины:
+
+var arr = ["Есть", "жизнь", "на", "Марсе"];
+
+var arrLength = [];
+for (var i = 0; i < arr.length; i++) {
+  arrLength[i] = arr[i].length;
+}
+
+alert( arrLength ); // 4,5,2,5
+Перепишите выделенный участок: уберите цикл, используйте вместо него метод map.
+*/
+
+var arr = ["Есть", "жизнь", "на", "Марсе"];
+
+var arrLength = arr.map(function(item) {
+	return item.length;
+});
+
+// console.log(arrLength);
+
+
+/*
+### 2
+
+На входе массив чисел, например: arr = [1,2,3,4,5].
+
+Напишите функцию getSums(arr), которая возвращает массив его частичных сумм.
+
+Иначе говоря, вызов getSums(arr) должен возвращать новый массив из такого же числа элементов, 
+в котором на каждой позиции должна быть сумма элементов arr до этой позиции включительно.
+
+То есть:
+
+для arr = [ 1, 2, 3, 4, 5 ]
+getSums( arr ) = [ 1, 1+2, 1+2+3, 1+2+3+4, 1+2+3+4+5 ] = [ 1, 3, 6, 10, 15 ]
+Еще пример: getSums([-2,-1,0,1]) = [-2,-3,-3,-2].
+
+Функция не должна модифицировать входной массив.
+В решении используйте метод arr.reduce.
+
+*/
+
+function getSums(arr) {
+	let sumsArr = [];	
+
+	let total = arr.reduce(function(sum, number) {
+		let a = sum + number;
+		sumsArr.push(a);
+		return sum += number;
+	}, 0);
+
+	console.log(total);
+	console.log(sumsArr);
+	return sumsArr;
+}
+
+getSums([1,2,3,4,5]);
